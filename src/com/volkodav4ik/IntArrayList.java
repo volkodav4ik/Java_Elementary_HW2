@@ -118,16 +118,12 @@ public class IntArrayList implements IntList {
     @Override
     public IntList subList(int fromIndex, int toIndex) {
         if ((fromIndex < 0 || toIndex > size || fromIndex > toIndex)) {
-            throw new IndexOutOfBoundsException("Index should be on range from 0 to " + (size - 1)
+            throw new IndexOutOfBoundsException("Index should be on range from 0 to " + size
                     + "and start index can't equal or more than final index");
         }
-        int elements = toIndex - fromIndex + 1;
+        int elements = toIndex - fromIndex;
         int[] tmpArr = new int[elements];
-        int index = fromIndex;
-        for (int i = 0; i < tmpArr.length; i++) {
-            tmpArr[i] = elementData[index];
-            index++;
-        }
+        System.arraycopy(elementData, fromIndex, tmpArr, 0, elements);
         return new IntArrayList(elements, tmpArr);
     }
 
